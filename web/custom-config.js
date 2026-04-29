@@ -49,4 +49,4 @@ config.toolbarButtons = Array.isArray(config.toolbarButtons)
   ? Array.from(new Set([...config.toolbarButtons, 'recording']))
   : toolbarButtonsWithRecording;
 
-config.disabledSounds = ['RECORDING_ON', 'RECORDING_OFF'];
+config.disabledSounds = ['RECORDING_ON_SOUND', 'RECORDING_OFF_SOUND'];
