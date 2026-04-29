@@ -1,4 +1,5 @@
 .env
+coolify.env
 .codex
 *.log
 .DS_Store
