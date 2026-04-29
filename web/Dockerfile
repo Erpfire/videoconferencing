@@ -18,6 +18,12 @@ RUN sed -i \
     -e 's/"sessionAlreadyActive": "This session is already being recorded or live streamed\."/"sessionAlreadyActive": "This meeting is already in progress."/g' \
     -e 's/"recordingWarning": "Other participants may be recording this call"/"recordingWarning": "This meeting is in progress"/g' \
     -e 's/"pending": "Preparing to record the meeting…"/"pending": "Starting live meeting…"/g' \
+    -e 's/"title": "Recording"/"title": "Meeting"/g' \
+    -e 's/"on": "Recording started"/"on": "Meeting started"/g' \
+    -e 's/"off": "Recording stopped"/"off": "Meeting ended"/g' \
+    -e 's/"offBy": "{{name}} stopped the recording"/"offBy": "{{name}} ended the meeting"/g' \
+    -e 's/"expandedPending": "Recording is being started…"/"expandedPending": "Starting live meeting…"/g' \
+    -e 's/"expandedOff": "Recording has stopped"/"expandedOff": "Meeting has ended"/g' \
     /usr/share/jitsi-meet/lang/main.json
 
 RUN truncate -s 0 \
