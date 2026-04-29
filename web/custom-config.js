@@ -48,3 +48,5 @@ const toolbarButtonsWithRecording = [
 config.toolbarButtons = Array.isArray(config.toolbarButtons)
   ? Array.from(new Set([...config.toolbarButtons, 'recording']))
   : toolbarButtonsWithRecording;
+
+config.disabledSounds = ['RECORDING_ON', 'RECORDING_OFF'];

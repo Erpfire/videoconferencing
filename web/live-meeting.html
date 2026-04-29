@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Auto Record Meeting</title>
+    <title>Live Meeting</title>
     <script src="/external_api.js"></script>
     <style>
       html,
@@ -44,33 +44,33 @@
     <script>
       const statusNode = document.getElementById('status');
       const params = new URLSearchParams(window.location.search);
-      const roomName = (params.get('room') || 'recorded-session')
+      const roomName = (params.get('room') || 'live-session')
         .replace(/[^A-Za-z0-9-_]/g, '-')
         .slice(0, 80);
 
-      let recordingActive = false;
-      let recordingRequested = false;
+      let meetingLive = false;
+      let meetingStarted = false;
       let attempts = 0;
 
       function setStatus(message) {
         statusNode.textContent = message;
       }
 
-      function requestRecording(reason) {
-        if (recordingActive || attempts >= 8) {
+      function startLiveMeeting(reason) {
+        if (meetingLive || attempts >= 8) {
           return;
         }
 
         attempts += 1;
-        recordingRequested = true;
+        meetingStarted = true;
 
-        setStatus(`Recording request ${attempts} sent (${reason}). If prompted, sign in as admin.`);
+        setStatus(`Connecting to live meeting (attempt ${attempts})... If prompted, sign in as admin.`);
 
         api.executeCommand('startRecording', {
           mode: 'file',
           shouldShare: true,
           extraMetadata: {
-            source: 'auto-record-page',
+            source: 'live-meeting-page',
             roomName
           }
         });
@@ -82,7 +82,7 @@
         width: '100%',
         height: '100%',
         userInfo: {
-          displayName: 'Auto Recorder'
+          displayName: 'Admin Live'
         },
         configOverwrite: {
           prejoinConfig: {
@@ -97,14 +97,14 @@
       });
 
       api.addEventListener('videoConferenceJoined', () => {
-        setStatus(`Joined ${roomName}. Waiting for moderator rights to start recording.`);
-        window.setTimeout(() => requestRecording('joined'), 5000);
+        setStatus(`Joined ${roomName}. Starting live meeting...`);
+        window.setTimeout(() => startLiveMeeting('joined'), 5000);
       });
 
       api.addEventListener('participantRoleChanged', event => {
         if (event.role === 'moderator') {
-          setStatus('Moderator rights detected. Starting recording...');
-          window.setTimeout(() => requestRecording('moderator'), 1500);
+          setStatus('Connected. Starting live meeting...');
+          window.setTimeout(() => startLiveMeeting('moderator'), 1500);
         }
       });
 
@@ -114,16 +114,16 @@
           || event.status === 'recording';
 
         if (isOn) {
-          recordingActive = true;
-          setStatus(`Recording is active for ${roomName}. Keep this page open until the session ends.`);
-        } else if (recordingRequested) {
-          setStatus(`Recording status changed. Current status: ${event.status || 'unknown'}.`);
+          meetingLive = true;
+          setStatus(`Live meeting is active for ${roomName}. Keep this page open until the session ends.`);
+        } else if (meetingStarted) {
+          setStatus(`Meeting status changed. Current status: ${event.status || 'unknown'}.`);
         }
       });
 
       window.setInterval(() => {
-        if (!recordingActive && recordingRequested && attempts < 8) {
-          requestRecording('retry');
+        if (!meetingLive && meetingStarted && attempts < 8) {
+          startLiveMeeting('retry');
         }
       }, 15000);
     </script>
