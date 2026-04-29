@@ -88,6 +88,31 @@ Required open ports:
 
 Only the `web` service is exposed through Traefik. `prosody`, `jicofo`, `jvb`, and `jibri` stay internal, except `jvb` publishes UDP `10000`.
 
+## Recording UI And Auto Record Page
+
+The web service mounts `web/custom-config.js` into `/config/custom-config.js`. Docker Jitsi appends this file to the generated server config on container start. It explicitly enables file recording, service recording, and the `recording` toolbar button.
+
+The web service also exposes:
+
+```text
+https://meet.freiza.cloud/auto-record.html?room=ROOM_NAME
+```
+
+Example:
+
+```text
+https://meet.freiza.cloud/auto-record.html?room=client-session
+```
+
+This page embeds the Jitsi room and calls the official Jitsi IFrame API `startRecording` command automatically after the page joins and receives moderator rights.
+
+Important limits:
+
+- It cannot bypass Jitsi authentication.
+- If the page asks for host login, sign in with the `admin` account.
+- Keep the auto-record page open for the whole session.
+- Guests can join the normal room URL, for example `https://meet.freiza.cloud/client-session`.
+
 ## Create Admin User
 
 After the stack is deployed, create a moderator user inside the Prosody container:
@@ -101,11 +126,11 @@ Use this admin login to create/start rooms. Guest devices can join after the roo
 
 ## Test Before Event
 
-1. Open `https://meet.freiza.cloud/test`.
+1. Open `https://meet.freiza.cloud/auto-record.html?room=test`.
 2. Log in as `admin`.
 3. Join from two or three devices.
-4. Start recording.
+4. Confirm the auto-record page says recording is active.
 5. Stop after a few minutes.
 6. Check the Coolify volume ending in `jitsi-recordings`.
 
-For the real event, start the room as `admin`, start recording, then let the 8 site devices join.
+For the real event, open the auto-record page as `admin`, confirm recording is active, then let the 8 site devices join the normal room URL.
