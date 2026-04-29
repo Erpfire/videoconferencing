@@ -44,7 +44,7 @@ This repo deploys a self-hosted Jitsi Meet server with one Jibri recorder for:
 - HTTPS: handled by Coolify Traefik
 - WebRTC media: direct UDP `10000`
 
-Jitsi is not a single-container app, so this uses `docker-compose.yaml` instead of a Dockerfile.
+Jitsi is not a single-container app, so this uses `docker-compose.yaml` for the full stack. The `web` service uses a small Dockerfile only to copy the helper auto-record page and custom web config into the Jitsi web image.
 
 ## Coolify Deployment
 
@@ -90,7 +90,7 @@ Only the `web` service is exposed through Traefik. `prosody`, `jicofo`, `jvb`, a
 
 ## Recording UI And Auto Record Page
 
-The web service mounts `web/custom-config.js` into `/config/custom-config.js`. Docker Jitsi appends this file to the generated server config on container start. It explicitly enables file recording, service recording, and the `recording` toolbar button.
+The web service uses `web/Dockerfile` to copy `web/custom-config.js` into `/config/custom-config.js` on container start. Docker Jitsi appends this file to the generated server config. It explicitly enables file recording, service recording, and the `recording` toolbar button.
 
 The web service also exposes:
 

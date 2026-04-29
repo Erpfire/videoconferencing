@@ -25,14 +25,15 @@ x-base-environment: &base-environment
 
 services:
   web:
-    image: jitsi/web:stable-10888
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    image: videoconferencing-jitsi-web:stable-10888
     restart: unless-stopped
     expose:
       - "80"
     volumes:
       - jitsi-web-config:/config
-      - ./web/custom-config.js:/config/custom-config.js:ro
-      - ./web/auto-record.html:/usr/share/jitsi-meet/static/auto-record.html:ro
       - jitsi-web-crontabs:/var/spool/cron/crontabs
       - jitsi-transcripts:/usr/share/jitsi-meet/transcripts
     environment:
