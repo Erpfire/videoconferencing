@@ -1,31 +1,31 @@
 name: jitsi-meet-recording
 
 x-base-environment: &base-environment
-  TZ: ${TZ:-Asia/Kolkata}
-  PUBLIC_URL: ${PUBLIC_URL:-https://meet.freiza.cloud}
-  XMPP_DOMAIN: ${XMPP_DOMAIN:-meet.jitsi}
-  XMPP_AUTH_DOMAIN: ${XMPP_AUTH_DOMAIN:-auth.meet.jitsi}
-  XMPP_GUEST_DOMAIN: ${XMPP_GUEST_DOMAIN:-guest.meet.jitsi}
-  XMPP_MUC_DOMAIN: ${XMPP_MUC_DOMAIN:-muc.meet.jitsi}
-  XMPP_INTERNAL_MUC_DOMAIN: ${XMPP_INTERNAL_MUC_DOMAIN:-internal-muc.meet.jitsi}
-  XMPP_HIDDEN_DOMAIN: ${XMPP_HIDDEN_DOMAIN:-recorder.meet.jitsi}
-  XMPP_RECORDER_DOMAIN: ${XMPP_RECORDER_DOMAIN:-recorder.meet.jitsi}
-  XMPP_SERVER: ${XMPP_SERVER:-xmpp.meet.jitsi}
-  XMPP_PORT: ${XMPP_PORT:-5222}
-  ENABLE_AUTH: ${ENABLE_AUTH:-1}
-  ENABLE_GUESTS: ${ENABLE_GUESTS:-1}
-  AUTH_TYPE: ${AUTH_TYPE:-internal}
-  ENABLE_RECORDING: ${ENABLE_RECORDING:-1}
-  ENABLE_SERVICE_RECORDING: ${ENABLE_SERVICE_RECORDING:-1}
-  ENABLE_XMPP_WEBSOCKET: ${ENABLE_XMPP_WEBSOCKET:-1}
-  ENABLE_COLIBRI_WEBSOCKET: ${ENABLE_COLIBRI_WEBSOCKET:-1}
-  DISABLE_HTTPS: ${DISABLE_HTTPS:-1}
-  ENABLE_LETSENCRYPT: ${ENABLE_LETSENCRYPT:-0}
-  ENABLE_HTTP_REDIRECT: ${ENABLE_HTTP_REDIRECT:-0}
+  TZ: Asia/Kolkata
+  PUBLIC_URL: https://meet.freiza.cloud
+  XMPP_DOMAIN: meet.jitsi
+  XMPP_AUTH_DOMAIN: auth.meet.jitsi
+  XMPP_GUEST_DOMAIN: guest.meet.jitsi
+  XMPP_MUC_DOMAIN: muc.meet.jitsi
+  XMPP_INTERNAL_MUC_DOMAIN: internal-muc.meet.jitsi
+  XMPP_HIDDEN_DOMAIN: recorder.meet.jitsi
+  XMPP_RECORDER_DOMAIN: recorder.meet.jitsi
+  XMPP_SERVER: xmpp.meet.jitsi
+  XMPP_PORT: "5222"
+  ENABLE_AUTH: "1"
+  ENABLE_GUESTS: "1"
+  AUTH_TYPE: internal
+  ENABLE_RECORDING: "1"
+  ENABLE_SERVICE_RECORDING: "1"
+  ENABLE_XMPP_WEBSOCKET: "1"
+  ENABLE_COLIBRI_WEBSOCKET: "1"
+  DISABLE_HTTPS: "1"
+  ENABLE_LETSENCRYPT: "0"
+  ENABLE_HTTP_REDIRECT: "0"
 
 services:
   web:
-    image: jitsi/web:${JITSI_IMAGE_VERSION:-stable-10888}
+    image: jitsi/web:stable-10888
     restart: unless-stopped
     expose:
       - "80"
@@ -35,23 +35,23 @@ services:
       - jitsi-transcripts:/usr/share/jitsi-meet/transcripts
     environment:
       <<: *base-environment
-      DISABLE_DEEP_LINKING: ${DISABLE_DEEP_LINKING:-1}
-      ENABLE_FILE_RECORDING_SHARING: ${ENABLE_FILE_RECORDING_SHARING:-1}
-      ENABLE_PREJOIN_PAGE: ${ENABLE_PREJOIN_PAGE:-1}
-      ENABLE_WELCOME_PAGE: ${ENABLE_WELCOME_PAGE:-1}
-      RESOLUTION: ${RESOLUTION:-720}
-      RESOLUTION_WIDTH: ${RESOLUTION_WIDTH:-1280}
-      START_WITH_AUDIO_MUTED: ${START_WITH_AUDIO_MUTED:-0}
-      START_WITH_VIDEO_MUTED: ${START_WITH_VIDEO_MUTED:-0}
+      DISABLE_DEEP_LINKING: "1"
+      ENABLE_FILE_RECORDING_SHARING: "1"
+      ENABLE_PREJOIN_PAGE: "1"
+      ENABLE_WELCOME_PAGE: "1"
+      RESOLUTION: "720"
+      RESOLUTION_WIDTH: "1280"
+      START_WITH_AUDIO_MUTED: "0"
+      START_WITH_VIDEO_MUTED: "0"
     labels:
       - traefik.enable=true
       - traefik.docker.network=coolify
-      - "traefik.http.routers.jitsi-web-http.rule=Host(`${PUBLIC_DOMAIN:-meet.freiza.cloud}`)"
+      - traefik.http.routers.jitsi-web-http.rule=Host(`meet.freiza.cloud`)
       - traefik.http.routers.jitsi-web-http.entrypoints=http
       - traefik.http.routers.jitsi-web-http.middlewares=jitsi-web-https-redirect
       - traefik.http.middlewares.jitsi-web-https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.jitsi-web-https-redirect.redirectscheme.permanent=true
-      - "traefik.http.routers.jitsi-web-https.rule=Host(`${PUBLIC_DOMAIN:-meet.freiza.cloud}`)"
+      - traefik.http.routers.jitsi-web-https.rule=Host(`meet.freiza.cloud`)
       - traefik.http.routers.jitsi-web-https.entrypoints=https
       - traefik.http.routers.jitsi-web-https.tls=true
       - traefik.http.routers.jitsi-web-https.tls.certresolver=letsencrypt
@@ -64,7 +64,7 @@ services:
       - meet.jitsi
 
   prosody:
-    image: jitsi/prosody:${JITSI_IMAGE_VERSION:-stable-10888}
+    image: jitsi/prosody:stable-10888
     restart: unless-stopped
     expose:
       - "5222"
@@ -77,62 +77,62 @@ services:
     environment:
       <<: *base-environment
       JICOFO_AUTH_PASSWORD: ${JICOFO_AUTH_PASSWORD:?Set JICOFO_AUTH_PASSWORD in Coolify}
-      JVB_AUTH_USER: ${JVB_AUTH_USER:-jvb}
+      JVB_AUTH_USER: jvb
       JVB_AUTH_PASSWORD: ${JVB_AUTH_PASSWORD:?Set JVB_AUTH_PASSWORD in Coolify}
-      JVB_BREWERY_MUC: ${JVB_BREWERY_MUC:-jvbbrewery}
-      JIBRI_BREWERY_MUC: ${JIBRI_BREWERY_MUC:-jibribrewery}
-      JIBRI_RECORDER_USER: ${JIBRI_RECORDER_USER:-recorder}
+      JVB_BREWERY_MUC: jvbbrewery
+      JIBRI_BREWERY_MUC: jibribrewery
+      JIBRI_RECORDER_USER: recorder
       JIBRI_RECORDER_PASSWORD: ${JIBRI_RECORDER_PASSWORD:?Set JIBRI_RECORDER_PASSWORD in Coolify}
-      JIBRI_XMPP_USER: ${JIBRI_XMPP_USER:-jibri}
+      JIBRI_XMPP_USER: jibri
       JIBRI_XMPP_PASSWORD: ${JIBRI_XMPP_PASSWORD:?Set JIBRI_XMPP_PASSWORD in Coolify}
-      LOG_LEVEL: ${LOG_LEVEL:-info}
-      PROSODY_ENABLE_RECORDING_METADATA: ${PROSODY_ENABLE_RECORDING_METADATA:-1}
+      LOG_LEVEL: info
+      PROSODY_ENABLE_RECORDING_METADATA: "1"
     networks:
       meet.jitsi:
         aliases:
           - xmpp.meet.jitsi
 
   jicofo:
-    image: jitsi/jicofo:${JITSI_IMAGE_VERSION:-stable-10888}
+    image: jitsi/jicofo:stable-10888
     restart: unless-stopped
     volumes:
       - jitsi-jicofo-config:/config
     environment:
       <<: *base-environment
-      ENABLE_AUTO_OWNER: ${ENABLE_AUTO_OWNER:-1}
-      JICOFO_ENABLE_AUTH: ${JICOFO_ENABLE_AUTH:-1}
-      JICOFO_AUTH_TYPE: ${JICOFO_AUTH_TYPE:-XMPP}
+      ENABLE_AUTO_OWNER: "1"
+      JICOFO_ENABLE_AUTH: "1"
+      JICOFO_AUTH_TYPE: XMPP
       JICOFO_AUTH_PASSWORD: ${JICOFO_AUTH_PASSWORD:?Set JICOFO_AUTH_PASSWORD in Coolify}
-      JVB_BREWERY_MUC: ${JVB_BREWERY_MUC:-jvbbrewery}
-      JIBRI_BREWERY_MUC: ${JIBRI_BREWERY_MUC:-jibribrewery}
+      JVB_BREWERY_MUC: jvbbrewery
+      JIBRI_BREWERY_MUC: jibribrewery
     depends_on:
       - prosody
     networks:
       - meet.jitsi
 
   jvb:
-    image: jitsi/jvb:${JITSI_IMAGE_VERSION:-stable-10888}
+    image: jitsi/jvb:stable-10888
     restart: unless-stopped
     ports:
-      - "${JVB_PORT:-10000}:${JVB_PORT:-10000}/udp"
+      - "10000:10000/udp"
     volumes:
       - jitsi-jvb-config:/config
     environment:
       <<: *base-environment
-      JVB_PORT: ${JVB_PORT:-10000}
-      JVB_ADVERTISE_IPS: ${JVB_ADVERTISE_IPS:-72.61.233.6}
-      JVB_AUTH_USER: ${JVB_AUTH_USER:-jvb}
+      JVB_PORT: "10000"
+      JVB_ADVERTISE_IPS: 72.61.233.6
+      JVB_AUTH_USER: jvb
       JVB_AUTH_PASSWORD: ${JVB_AUTH_PASSWORD:?Set JVB_AUTH_PASSWORD in Coolify}
-      JVB_BREWERY_MUC: ${JVB_BREWERY_MUC:-jvbbrewery}
-      JVB_REQUIRE_VALID_ADDRESS: ${JVB_REQUIRE_VALID_ADDRESS:-1}
-      PUBLIC_URL: ${PUBLIC_URL:-https://meet.freiza.cloud}
+      JVB_BREWERY_MUC: jvbbrewery
+      JVB_REQUIRE_VALID_ADDRESS: "1"
+      PUBLIC_URL: https://meet.freiza.cloud
     depends_on:
       - prosody
     networks:
       - meet.jitsi
 
   jibri:
-    image: jitsi/jibri:${JITSI_IMAGE_VERSION:-stable-10888}
+    image: jitsi/jibri:stable-10888
     restart: unless-stopped
     shm_size: "2gb"
     cap_add:
@@ -143,15 +143,15 @@ services:
     environment:
       <<: *base-environment
       DISPLAY: ":0"
-      JIBRI_BREWERY_MUC: ${JIBRI_BREWERY_MUC:-jibribrewery}
-      JIBRI_RECORDER_USER: ${JIBRI_RECORDER_USER:-recorder}
+      JIBRI_BREWERY_MUC: jibribrewery
+      JIBRI_RECORDER_USER: recorder
       JIBRI_RECORDER_PASSWORD: ${JIBRI_RECORDER_PASSWORD:?Set JIBRI_RECORDER_PASSWORD in Coolify}
-      JIBRI_RECORDING_DIR: ${JIBRI_RECORDING_DIR:-/config/recordings}
-      JIBRI_RECORDING_RESOLUTION: ${JIBRI_RECORDING_RESOLUTION:-1280x720}
-      JIBRI_STRIP_DOMAIN_JID: ${JIBRI_STRIP_DOMAIN_JID:-muc}
-      JIBRI_XMPP_USER: ${JIBRI_XMPP_USER:-jibri}
+      JIBRI_RECORDING_DIR: /config/recordings
+      JIBRI_RECORDING_RESOLUTION: 1280x720
+      JIBRI_STRIP_DOMAIN_JID: muc
+      JIBRI_XMPP_USER: jibri
       JIBRI_XMPP_PASSWORD: ${JIBRI_XMPP_PASSWORD:?Set JIBRI_XMPP_PASSWORD in Coolify}
-      XMPP_TRUST_ALL_CERTS: ${XMPP_TRUST_ALL_CERTS:-1}
+      XMPP_TRUST_ALL_CERTS: "1"
     depends_on:
       - jicofo
     networks:

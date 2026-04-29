@@ -51,7 +51,7 @@ Jitsi is not a single-container app, so this uses `docker-compose.yaml` instead 
 1. Push this repository to GitHub.
 2. In Coolify, create a new Docker Compose resource from the GitHub repo.
 3. Use `docker-compose.yaml`.
-4. Add the environment variables from `.env.example`.
+4. Add only the four password environment variables from `.env.example`.
 5. Replace the four password values with generated values.
 6. Deploy.
 
@@ -60,6 +60,17 @@ Generate passwords locally:
 ```bash
 ./scripts/generate-passwords.sh
 ```
+
+Coolify should only need these environment variables:
+
+```env
+JICOFO_AUTH_PASSWORD=...
+JVB_AUTH_PASSWORD=...
+JIBRI_RECORDER_PASSWORD=...
+JIBRI_XMPP_PASSWORD=...
+```
+
+If Coolify previously generated variables like `XMPP_DOMAIN`, `PUBLIC_URL`, `JVB_PORT`, or `ENABLE_AUTH`, click **Reload Compose File** after pulling the latest commit. Then delete the old generated variables and keep only the four password variables above.
 
 Required DNS:
 
@@ -97,4 +108,4 @@ Use this admin login to create/start rooms. Guest devices can join after the roo
 5. Stop after a few minutes.
 6. Check the Coolify volume ending in `jitsi-recordings`.
 
-For the real event, start the room as `admin`, start recording automatically, then let the 8 site devices join.
+For the real event, start the room as `admin`, start recording, then let the 8 site devices join.
