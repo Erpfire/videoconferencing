@@ -1,0 +1,40 @@
+- main [ref=e2]:
+  - generic [ref=e5]:
+    - generic [ref=e7]:
+      - link "Jitsi Meet Logo, links to Homepage" [ref=e9] [cursor=pointer]:
+        - /url: https://jitsi.org
+      - figure [ref=e12]
+    - generic [ref=e14]:
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - heading "Join meeting" [level=1] [ref=e19]
+          - generic [ref=e21]: Jokerd
+          - generic [ref=e22]:
+            - textbox "Enter your name" [active] [ref=e25]: Pat Live
+            - button "Join meeting" [ref=e28] [cursor=pointer]:
+              - text: Join meeting
+              - button "Join without audio" [ref=e29]:
+                - generic [ref=e30]:
+                  - img
+        - generic [ref=e32]:
+          - generic [ref=e35]:
+            - button "Mute microphone" [ref=e36] [cursor=pointer]:
+              - img [ref=e40]
+            - button "Audio settings" [ref=e44] [cursor=pointer]:
+              - img [ref=e45]
+          - generic [ref=e49]:
+            - button "Start camera" [disabled] [pressed] [ref=e50] [cursor=pointer]:
+              - img [ref=e54]
+            - generic "Video settings" [ref=e58]:
+              - img [ref=e59]
+          - button "Invite people" [ref=e61] [cursor=pointer]:
+            - img [ref=e65]
+          - button "Select Background" [ref=e68] [cursor=pointer]:
+            - img [ref=e72]
+          - button "Open settings" [ref=e75] [cursor=pointer]:
+            - img [ref=e79]
+          - button "Leave the meeting" [ref=e82] [cursor=pointer]:
+            - img [ref=e86]
+        - alert [ref=e89]:
+          - heading "You need to enable microphone and camera access" [level=3] [ref=e90]
+      - generic [ref=e93]: PL

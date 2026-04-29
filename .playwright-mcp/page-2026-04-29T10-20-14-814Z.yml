@@ -1,0 +1,88 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]: Loading meeting...
+  - iframe [ref=e4]:
+    - main [ref=f1e2]:
+      - generic [ref=f1e5]:
+        - generic [ref=f1e6]:
+          - img [ref=f1e12]
+          - generic [ref=f1e15]:
+            - generic [ref=f1e18]: Jokerd
+            - generic [ref=f1e19]: 02:31
+            - button "Performance settings" [ref=f1e21] [cursor=pointer]:
+              - img [ref=f1e23]
+              - generic [ref=f1e26]: Performance settings
+        - generic [ref=f1e27]:
+          - generic [ref=f1e28]:
+            - link "Jitsi Meet Logo, links to Homepage" [ref=f1e30] [cursor=pointer]:
+              - /url: https://jitsi.org
+            - generic [ref=f1e36]: PL
+            - generic:
+              - generic: Pat Live
+          - generic [ref=f1e37]:
+            - heading "Video thumbnails" [level=1] [ref=f1e38]
+            - button "Toggle filmstrip" [expanded] [ref=f1e40] [cursor=pointer]:
+              - img [ref=f1e42]
+            - generic [ref=f1e45]:
+              - generic [ref=f1e48]:
+                - generic:
+                  - button "Pat Live - Pin"
+                - generic [ref=f1e52]:
+                  - img "Participant is muted" [ref=f1e57]
+                  - generic [ref=f1e63]: Pat Live
+                - generic [ref=f1e64]:
+                  - generic:
+                    - generic:
+                      - button
+                - generic [ref=f1e67]: PL
+              - generic [ref=f1e77]:
+                - generic:
+                  - button "Pat Live - Pin"
+                - generic [ref=f1e80]:
+                  - img "Participant is muted" [ref=f1e85]
+                  - img "Moderator" [ref=f1e93]
+                  - generic [ref=f1e97]: Pat Live
+                - generic [ref=f1e98]:
+                  - generic:
+                    - generic:
+                      - button
+                - generic [ref=f1e102]: PL
+        - heading "Toolbar" [level=1] [ref=f1e110]
+        - generic [ref=f1e112]:
+          - generic [ref=f1e115]:
+            - button "Unmute microphone" [pressed] [ref=f1e116] [cursor=pointer]:
+              - img [ref=f1e120]
+            - button "Audio settings" [ref=f1e125] [cursor=pointer]:
+              - img [ref=f1e126]
+          - generic [ref=f1e130]:
+            - button "Start camera" [disabled] [pressed] [ref=f1e131] [cursor=pointer]:
+              - img [ref=f1e135]
+            - generic "Video settings" [ref=f1e139]:
+              - img [ref=f1e140]
+          - button "Start sharing your screen" [ref=f1e142] [cursor=pointer]:
+            - img [ref=f1e146]
+          - button "Open chat" [ref=f1e150] [cursor=pointer]:
+            - img [ref=f1e154]
+          - generic [ref=f1e158]:
+            - button "Raise your hand" [ref=f1e159] [cursor=pointer]:
+              - img [ref=f1e163]
+            - button "Reactions menu" [ref=f1e167]:
+              - img "Reactions menu" [ref=f1e169] [cursor=pointer]
+          - generic [ref=f1e171]:
+            - button "Open participants panel. 2 participants" [ref=f1e172] [cursor=pointer]:
+              - img [ref=f1e176]
+            - generic: "2"
+          - button "Enter tile view" [ref=f1e180] [cursor=pointer]:
+            - img [ref=f1e184]
+          - button "Invite people" [ref=f1e186] [cursor=pointer]:
+            - img [ref=f1e190]
+          - button "More actions" [ref=f1e195] [cursor=pointer]:
+            - img [ref=f1e199]
+          - button "Leave the meeting" [ref=f1e201] [cursor=pointer]:
+            - img [ref=f1e205]
+        - status [ref=f1e208]:
+          - generic [ref=f1e210]:
+            - img [ref=f1e213]
+            - generic [ref=f1e215]:
+              - generic [ref=f1e216]: Recording
+              - paragraph [ref=f1e218]: Fellow Jitster started the recording
+            - img [ref=f1e220] [cursor=pointer]
