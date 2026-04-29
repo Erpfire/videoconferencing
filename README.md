@@ -95,13 +95,13 @@ The web service mounts `web/custom-config.js` into `/config/custom-config.js`. D
 The web service also exposes:
 
 ```text
-https://meet.freiza.cloud/auto-record.html?room=ROOM_NAME
+https://meet.freiza.cloud/static/auto-record.html?room=ROOM_NAME
 ```
 
 Example:
 
 ```text
-https://meet.freiza.cloud/auto-record.html?room=client-session
+https://meet.freiza.cloud/static/auto-record.html?room=client-session
 ```
 
 This page embeds the Jitsi room and calls the official Jitsi IFrame API `startRecording` command automatically after the page joins and receives moderator rights.
@@ -126,7 +126,7 @@ Use this admin login to create/start rooms. Guest devices can join after the roo
 
 ## Test Before Event
 
-1. Open `https://meet.freiza.cloud/auto-record.html?room=test`.
+1. Open `https://meet.freiza.cloud/static/auto-record.html?room=test`.
 2. Log in as `admin`.
 3. Join from two or three devices.
 4. Confirm the auto-record page says recording is active.
