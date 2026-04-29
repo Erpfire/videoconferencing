@@ -14,3 +14,17 @@ RUN sed -i \
     -e 's/"onBy": "{{name}} started the recording"/"onBy": "{{name}} started video conferencing"/g' \
     -e 's/"expandedOn": "The meeting is currently being recorded"/"expandedOn": "meeting is in progress"/g' \
     /usr/share/jitsi-meet/lang/main.json
+
+RUN truncate -s 0 \
+    /usr/share/jitsi-meet/sounds/recordingOn.mp3 \
+    /usr/share/jitsi-meet/sounds/recordingOn.opus \
+    /usr/share/jitsi-meet/sounds/recordingOn_fr.mp3 \
+    /usr/share/jitsi-meet/sounds/recordingOn_fr.opus \
+    /usr/share/jitsi-meet/sounds/recordingOn_frCA.mp3 \
+    /usr/share/jitsi-meet/sounds/recordingOn_frCA.opus \
+    /usr/share/jitsi-meet/sounds/recordingOff.mp3 \
+    /usr/share/jitsi-meet/sounds/recordingOff.opus \
+    /usr/share/jitsi-meet/sounds/recordingOff_fr.mp3 \
+    /usr/share/jitsi-meet/sounds/recordingOff_fr.opus \
+    /usr/share/jitsi-meet/sounds/recordingOff_frCA.mp3 \
+    /usr/share/jitsi-meet/sounds/recordingOff_frCA.opus
