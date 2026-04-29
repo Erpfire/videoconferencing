@@ -44,13 +44,13 @@ This repo deploys a self-hosted Jitsi Meet server with one Jibri recorder for:
 - HTTPS: handled by Coolify Traefik
 - WebRTC media: direct UDP `10000`
 
-Jitsi is not a single-container app, so this uses `docker-compose.yml` instead of a Dockerfile.
+Jitsi is not a single-container app, so this uses `docker-compose.yaml` instead of a Dockerfile.
 
 ## Coolify Deployment
 
 1. Push this repository to GitHub.
 2. In Coolify, create a new Docker Compose resource from the GitHub repo.
-3. Use `docker-compose.yml`.
+3. Use `docker-compose.yaml`.
 4. Add the environment variables from `.env.example`.
 5. Replace the four password values with generated values.
 6. Deploy.
